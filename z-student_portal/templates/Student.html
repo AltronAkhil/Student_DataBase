@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Information</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #4F46E5 0%, #10B981 100%);
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <div class="gradient-bg text-white py-6">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-user-graduate text-2xl"></i>
+          <span class="text-xl font-bold">Student Portal</span>
+        </div>
+        <a href="/login" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-full">
+          <i class="fas fa-sign-out-alt mr-2"></i> Logout
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Centered Profile Card -->
+  <div class="flex-grow flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl p-6 max-w-2xl w-full mx-4 relative card-hover text-center">
+      <div class="absolute -top-16 left-1/2 transform -translate-x-1/2">
+        <img src="{{ url_for('static', filename='images/img.jpg') }}" alt="Profile Image" class="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-white">
+      </div>
+      <h1 id="studentName" class="text-3xl font-bold mt-16 mb-2 text-gray-800">{{ name }}</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="flex items-center mb-2">
+            <div class="bg-primary bg-opacity-10 p-2 rounded-full mr-3">
+              <i class="fas fa-id-card text-primary"></i>
+            </div>
+            <h3 class="font-semibold text-gray-700">Student ID</h3>
+          </div>
+          <p id="studentId" class="text-lg font-medium text-gray-600">{{ student_id }}</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="flex items-center mb-2">
+            <div class="bg-green-500 bg-opacity-10 p-2 rounded-full mr-3">
+              <i class="fas fa-envelope text-green-500"></i>
+            </div>
+            <h3 class="font-semibold text-gray-700">Email Address</h3>
+          </div>
+          <p id="studentEmail" class="text-lg font-medium text-gray-600">{{ email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="container mx-auto px-4 text-center">
+      <p>© 2023 University Student Portal. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

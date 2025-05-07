@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        .password-strength {
+            height: 4px;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md mx-auto">
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <!-- Header Section -->
+            <div class="gradient-bg py-6 px-8 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold">Student Portal</h1>
+                        <p class="text-blue-100 mt-1">Create your student account</p>
+                    </div>
+                    <div class="bg-white/20 p-3 rounded-full">
+                        <i class="fas fa-user-plus text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Registration Form -->
+            <div class="px-8 py-6">
+                <form action="/register" method="POST" id="registerForm" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input 
+                                    type="text" 
+                                    id="firstName" 
+                                    name="firstName" 
+                                    placeholder="John" 
+                                    class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition duration-200"
+                                    required
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="student@university.edu" 
+                                class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition duration-200"
+                                required
+                            >
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="studentId" class="block text-sm font-medium text-gray-700 mb-1">Student ID</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-id-card text-gray-400"></i>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="studentId" 
+                                name="studentId" 
+                                placeholder="STD-2023-XXXX" 
+                                class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition duration-200"
+                                required
+                            >
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Create a password" 
+                                class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition duration-200"
+                                required
+                                minlength="8"
+                            >
+                            <button type="button" id="togglePassword" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="mt-2 grid grid-cols-4 gap-1">
+                            <div id="strength-1" class="password-strength bg-gray-200 rounded"></div>
+                            <div id="strength-2" class="password-strength bg-gray-200 rounded"></div>
+                            <div id="strength-3" class="password-strength bg-gray-200 rounded"></div>
+                            <div id="strength-4" class="password-strength bg-gray-200 rounded"></div>
+                        </div>
+                        <p id="password-help" class="mt-1 text-xs text-gray-500">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+                    </div>
+                    
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                placeholder="Confirm your password" 
+                                class="pl-10 w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none input-focus transition duration-200"
+                                required
+                            >
+                        </div>
+                        <p id="password-match" class="mt-1 text-xs hidden"><i class="fas fa-check mr-1"></i> Passwords match</p>
+                        <p id="password-mismatch" class="mt-1 text-xs hidden"><i class="fas fa-times mr-1"></i> Passwords don't match</p>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input 
+                            type="checkbox" 
+                            id="terms" 
+                            name="terms" 
+                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            required
+                        >
+                        <label for="terms" class="ml-2 block text-sm text-gray-700">
+                            I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms of Service</a> and <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <button 
+                            type="submit" 
+                            class="w-full gradient-bg text-white py-3 px-4 rounded-lg font-medium hover:opacity-90 transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-white text-gray-500">Already have an account?</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <a href="/login" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <i class="fas fa-sign-in-alt text-blue-500 mr-2"></i> Sign in instead
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-6 text-center text-sm text-gray-500">
+            <p>© 2023 Student Portal. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const passwordMatch = document.getElementById('password-match');
+            const passwordMismatch = document.getElementById('password-mismatch');
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            // Password strength indicator
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strengthBars = [
+                    document.getElementById('strength-1'),
+                    document.getElementById('strength-2'),
+                    document.getElementById('strength-3'),
+                    document.getElementById('strength-4')
+                ];
+                
+                // Reset all bars
+                strengthBars.forEach(bar => {
+                    bar.classList.remove('bg-red-500', 'bg-yellow-400', 'bg-green-400', 'bg-green-500');
+                    bar.classList.add('bg-gray-200');
+                });
+                
+                if (password.length === 0) {
+                    return;
+                }
+                
+                // Calculate password strength
+                let strength = 0;
+                
+                // Length check
+                if (password.length >= 5) strength += 1;
+                if (password.length >= 7) strength += 1;
+                
+                // Complexity checks
+                if (/[A-Z]/.test(password)) strength += 1; // Uppercase
+                if (/[0-9]/.test(password)) strength += 1; // Numbers
+                
+                // Cap at 4
+                strength = Math.min(strength, 4);
+                
+                // Update bars
+                for (let i = 0; i < strength; i++) {
+                    if (strength <= 2) {
+                        strengthBars[i].classList.add('bg-red-500');
+                    } else if (strength === 3) {
+                        strengthBars[i].classList.add('bg-yellow-400');
+                    } else {
+                        strengthBars[i].classList.add('bg-green-500');
+                    }
+                    strengthBars[i].classList.remove('bg-gray-200');
+                }
+            });
+            
+            // Confirm password validation
+            confirmPasswordInput.addEventListener('input', function() {
+                if (passwordInput.value === this.value && passwordInput.value.length > 0) {
+                    passwordMatch.classList.remove('hidden');
+                    passwordMatch.classList.add('text-green-600');
+                    passwordMismatch.classList.add('hidden');
+                } else if (this.value.length > 0) {
+                    passwordMismatch.classList.remove('hidden');
+                    passwordMismatch.classList.add('text-red-600');
+                    passwordMatch.classList.add('hidden');
+                } else {
+                    passwordMatch.classList.add('hidden');
+                    passwordMismatch.classList.add('hidden');
+                }
+            });
+            
+            // Form submission
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const studentId = document.getElementById('studentId').value;
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                const terms = document.getElementById('terms').checked;
+                
+                // Validate form
+                if (!terms) {
+                    alert('You must agree to the Terms of Service and Privacy Policy');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    registerForm.classList.add('shake');
+                    setTimeout(() => registerForm.classList.remove('shake'), 500);
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    registerForm.classList.add('shake');
+                    setTimeout(() => registerForm.classList.remove('shake'), 500);
+                    alert('Password must be at least 8 characters long');
+                    return;
+                }
+                
+                // Simulate registration process
+                const submitBtn = registerForm.querySelector('button[type="submit"]');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Creating account...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // In a real app, you would handle the registration response here
+                    alert(`Registration successful for ${firstName} ${lastName} (${studentId})`);
+                    
+                    // Store the registered student ID (for demo purposes)
+                    localStorage.setItem('registeredStudentId', studentId);
+                    
+                    // Redirect to login page after successful registration
+                    window.location.href = 'login.html';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
